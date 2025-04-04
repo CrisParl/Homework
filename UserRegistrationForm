@@ -1,0 +1,74 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class UserRegistrationForm {
+
+    private JFrame frame;
+    private JTextField nameField, emailField, passwordField, confirmPasswordField;
+    private JButton submitButton, clearButton;
+
+    public UserRegistrationForm() {
+        frame = new JFrame("User Registration");
+        frame.setLayout(new GridLayout(5, 2, 10, 10));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JLabel nameLabel = new JLabel("Name:");
+        JLabel emailLabel = new JLabel("Email:");
+        JLabel passwordLabel = new JLabel("Password:");
+        JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
+
+        nameField = new JTextField();
+        emailField = new JTextField();
+        passwordField = new JTextField();
+        confirmPasswordField = new JTextField();
+
+        submitButton = new JButton("Submit");
+        clearButton = new JButton("Clear");
+
+        frame.add(nameLabel);
+        frame.add(nameField);
+        frame.add(emailLabel);
+        frame.add(emailField);
+        frame.add(passwordLabel);
+        frame.add(passwordField);
+        frame.add(confirmPasswordLabel);
+        frame.add(confirmPasswordField);
+        frame.add(submitButton);
+        frame.add(clearButton);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (nameField.getText().isEmpty() || emailField.getText().isEmpty() || 
+                    passwordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    String message = "Name: " + nameField.getText() + "\n" +
+                                     "Email: " + emailField.getText() + "\n" +
+                                     "Password: " + passwordField.getText() + "\n" +
+                                     "Confirm Password: " + confirmPasswordField.getText();
+                    JOptionPane.showMessageDialog(frame, message, "Registration Information", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nameField.setText("");
+                emailField.setText("");
+                passwordField.setText("");
+                confirmPasswordField.setText("");
+            }
+        });
+
+        frame.setSize(300, 300);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new UserRegistrationForm();
+    }
+}
